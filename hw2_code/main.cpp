@@ -71,14 +71,15 @@ int main()
         if (conf){
             ADCdata[idx] = Ain;
             if (idx == 49){
-                break;
+                printf("%d\r\n", freq);
+                for (j = 0; j < 50; j++){
+                    printf("%lf\r\n", ADCdata[j]);
+                }
+                idx = 0;
             } else {
                 idx++;
             }
         }
     }
-    printf("%d\r\n", freq);
-    for (j = 0; j < 50; j++){
-        printf("%lf\r\n", ADCdata[j]);
-    }
+    
 }
