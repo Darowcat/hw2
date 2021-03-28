@@ -14,7 +14,6 @@ AnalogOut Aout(PA_4);
 AnalogIn Ain(A5);
 uLCD_4DGL uLCD(D1, D0, D2);
 
-//Timer timer;
 int freq = 355;
 double T = 1000.0f / freq;
 double i = 0.0f;
@@ -22,8 +21,6 @@ double ADCdata[50];
 int j;
 bool conf = false;
 int idx = 0;
-//EventQueue queue(32 * EVENTS_EVENT_SIZE);
-//Thread thread;
 
 void info(){
     uLCD.locate(1,2);
@@ -31,55 +28,12 @@ void info(){
     uLCD.printf("%.2lf\n", T);
 }
 
-/*
-void add_freq(){
-    if (duration_cast<milliseconds>(timer.elapsed_time()).count() > 500)
-    {
-        freq += 50;
-        timer.reset();
-
-        queue.call(info);
-    }
-}
-
-void dec_freq(){
-    if (duration_cast<milliseconds>(timer.elapsed_time()).count() > 500)
-    {
-        freq -= 50;
-        timer.reset();
-
-        queue.call(info);
-    }
-}
-
-void confirm_freq(){
-    if (duration_cast<milliseconds>(timer.elapsed_time()).count() > 500)
-    {
-        T = 1000.0f / freq;
-        timer.reset();
-
-        queue.call(info);
-    }
-}
-*/
-
 int main()
-{
-    
-    
+{   
     uLCD.text_width(2);
     uLCD.text_height(2);
     uLCD.color(WHITE);
     info();
-    /*
-    timer.start();
-    up_button.rise(&add_freq);
-    down_button.rise(&dec_freq);
-    confirm_button.rise(&confirm_freq);
-
-    thread.start(callback(&queue, &EventQueue::dispatch_forever));
-    queue.call(info);
-    */
    
     while (1)
     {
@@ -110,8 +64,6 @@ int main()
             Aout = (T - i) / (0.11f * T);
         }
 
-        
-        //printf("%lf\r\n", Ain);
         wait_us(int(T * 20.0f - 40.0f));
         
         i += (T / 50.0f);
