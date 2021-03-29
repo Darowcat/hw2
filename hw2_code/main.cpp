@@ -76,6 +76,7 @@ int main()
                     printf("%lf\r\n", ADCdata[j]);
                 }
                 idx = 0;
+                conf = 0;
             } else {
                 idx++;
             }
