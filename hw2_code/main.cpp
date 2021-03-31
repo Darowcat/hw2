@@ -17,7 +17,7 @@ uLCD_4DGL uLCD(D1, D0, D2);
 int freq = 355;
 double T = 1000.0f / freq;
 double i = 0.0f;
-double ADCdata[50];
+double ADCdata[100];
 int j;
 bool conf = false;
 int idx = 0;
@@ -56,7 +56,7 @@ int main()
         
         if (i >= T){
             i = 0;
-            idx = 0;
+            //idx = 0;
         }
         if (i <= 0.9f * T){
             Aout = i / (0.99f * T);
@@ -70,14 +70,15 @@ int main()
 
         if (conf){
             ADCdata[idx] = Ain;
-            if (idx == 49){
+            if (idx == 99){
                 printf("%d\r\n", freq);
-                for (j = 0; j < 50; j++){
+                for (j = 0; j < 100; j++){
                     printf("%lf\r\n", ADCdata[j]);
                 }
                 idx = 0;
                 conf = 0;
             } else {
+                //printf("%d\r\n", idx);
                 idx++;
             }
         }
